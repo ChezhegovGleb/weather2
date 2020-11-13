@@ -1,0 +1,313 @@
+.refresh-button-mobile {
+    display: none;
+}
+
+.refresh-button-desktop {
+    height: 60px;
+    font-size: 20px;
+    border: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 50px;
+}
+
+.heading-text {
+    margin: 10px;
+}
+
+.big-icon-weather {
+    height: 150px;
+    width: 150px;
+}
+
+.wind,
+.cloudy,
+.pressure,
+.humidity,
+.coordinates {
+    display: flex;
+    margin: 10px;
+    justify-content: space-between;
+    background-color: gray;
+    color: white;
+    padding: 0.5em;
+    box-sizing: border-box;
+    font-size: 25px;
+}
+
+.type-param {
+    font-weight: bold;
+    justify-content: space-between;
+}
+
+.favorites {
+    font-size: 30px;
+    margin-left: 10px;
+    margin-bottom: auto;
+    margin-top: auto;
+}
+
+.add-card {
+    text-align: right;
+    margin: 10px;
+    margin-bottom: auto;
+    margin-top: auto;
+}
+
+.add-button {
+    background: white;
+    border: 0;
+    height: 60px;
+    width: 60px;
+    margin-bottom: auto;
+    margin-top: auto;
+}
+
+
+.list-cards {
+    display: grid;
+    margin: auto;
+    text-align: left;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr 1fr;
+    padding: 0;
+    margin: 0px;
+    list-style-type: none;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-template-areas:
+        "card card";
+}
+
+.card {
+    position: relative;
+    vertical-align: bottom;
+}
+
+/*
+.container {
+    max-width: 1080px;
+    margin: auto;
+    display: grid;
+    color: gray;
+    text-align: left;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-template-areas:
+        "card-city card-params"
+        "favorites add-card"
+        "list-cards list-cards";
+}
+*/
+
+.delete {
+/*    margin-left: auto;*/
+    background: white;
+    border: 0;
+    height: 60px;
+    width: 60px;
+}
+
+.icon-weather {
+    display: none;
+    height: 60px;
+    width: 60px;
+}
+
+
+.temperature {
+    display: none;
+    color: gray;
+    font-size: 40px;
+    vertical-align: bottom;
+}
+
+.add-text {
+    font-size: 25px;
+    padding-left: 10px;
+    vertical-align: top;
+    height: 60px;
+    width: 300px;
+}
+
+.data {
+    display: flex;
+    justify-content: space-between;
+    align-content: bottom;
+    margin: 10px;
+}
+
+.name {
+    color: gray;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.big-name {
+    display: block;
+    color: gray;
+    font-size: 60px;
+    margin: 10px;
+}
+
+.big-temperature {
+    display: block;
+    color: gray;
+    font-size: 100px;
+}
+
+.list-params {
+    padding: 0;
+    margin: 0px;
+}
+
+.card-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+
+.name,
+.icon-weather,
+.temperature,
+.delete {
+    margin-top: auto;
+    margin-bottom: 0px;
+/*    text-align: right;*/
+}
+
+.heading {
+    max-width: 1080px;
+    display: flex;
+    font-size: 30px;
+    color: gray;
+    padding: 0px;
+    text-align: left;
+}
+
+.body {
+    max-width: 1080px;
+    margin: auto;
+}
+
+.container {
+    max-width: 1080px;
+    display: grid;
+    color: gray;
+    text-align: left;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-template-areas:
+        "card-city card-params"
+        "favorites add-card"
+        "list-cards list-cards";
+}
+
+@media all and (max-width: 1080px) {
+
+    .card-title {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 10px;
+    }
+
+    .refresh-button-mobile {
+        display: block;
+        height: 60px;
+        width: 60px;
+        background: white;
+        border: 0;
+        margin: 10px;
+        margin-top: auto;
+        margin-bottom: auto;
+        float: right;
+    }
+
+    .refresh-button-desktop {
+        display: none;
+    }
+
+    .add-card {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .add-text {
+        flex: 1;
+        font-size: 25px;
+        padding-left: 10px;
+    }
+
+    .add-button {
+        flex: none;
+        background: white;
+        border: 0;
+        height: 60px;
+        width: 60px;
+    }
+
+    .list-cards {
+        display: contents;
+    }
+
+    .body {
+        max-width: 1080px;
+        margin: auto;
+        display: grid;
+        color: gray;
+        text-align: left;
+    }
+
+    .container {
+        display: block;
+    }
+}
+
+.card-city,
+.big-card-params {
+    display: none;
+}
+
+.refresh-image {
+    height: 60px;
+    width: 60px;
+    margin: auto;
+    text-align: center;
+}
+
+.inform {
+    display: block;
+}
+
+.loadInform {
+    font-size: 40px;
+    display: grid;
+    text-align: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 10px 1fr;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-template-areas:
+        "inform"
+        "refresh-image";
+}
+
+.loadInformCard {
+    font-size: 30px;
+    display: grid;
+    text-align: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 100px 1fr;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-template-areas:
+        "inform"
+        "refresh-image";
+}
+
+.card-params {
+    display: none;
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Погода</title>
+    <meta name="viewport" content="width=device-width, initial-scale=0.7">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="body">
+    <script src="js/script.js"></script>
+    <header class="heading">
+        <h1 class="heading-text">Погода здесь</h1>
+        <button class="refresh-button-desktop" id="refresh-button-desktop" onclick="navigator.geolocation.getCurrentPosition(success, error)">Обновить геолокацию
+        </button>
+        <button class="refresh-button-mobile" id="refresh-button-mobile" onclick="navigator.geolocation.getCurrentPosition(success, error)"><img src="images/refresh.svg">
+        </button>
+    </header>
+    <main class="container">
+        <div id="loadInfrorm" class="loadInform">
+            <div class="inform">Подождите, данные загружаются</div>
+            <img class="refresh-image" src="images/refresh.svg">
+        </div>
+
+        <div id="big-card-city" class="big-card-city">
+            <h2 class="big-name" id="big-name">Sochi</h2>
+            <div class="data">
+                <img class="big-icon-weather" id="big-icon-weather" src="images/sun.svg">
+                <div class="big-temperature" id="big-temp">20°C</div>
+            </div>
+        </div>
+        <div id="big-card-params" class="big-card-params">
+            <ul class="list-params">
+                <li class="wind">
+                    <div class=type-param>Ветер</div>
+                    <div class=value-param id="big-wind">Moderate breeze</div>
+                </li>
+                <li class="cloudy">
+                    <div class=type-param>Облачность</div>
+                    <div class=value-param id="big-clouds">No clouds</div>
+                </li>
+                <li class="pressure">
+                    <div class=type-param>Давление</div>
+                    <div class=value-param id="big-pressure">1013 hpa</div>
+                </li>
+                <li class="humidity">
+                    <div class=type-param>Влажность</div>
+                    <div class=value-param id="big-humidity">52%</div>
+                </li>
+                <li class="coordinates">
+                    <div class=type-param>Координаты</div>
+                    <div class=value-param id="big-coords">[59.88, 30.42]</div>
+                </li>
+            </ul>
+        </div>
+        <div class="favorites">
+            <h2>Избранное
+            </h2>
+        </div>
+        <div class="add-card">
+            <input class="add-text" id="add-city-name" type="text" placeholder="Добавить новый город">
+            <button class="add-button" onclick="clickAdd()"><img src="images/add.svg"></button>
+        </div>
+        <ul class="list-cards" id="list-cards">
+        </ul>
+    </main>
+
+
+    <template id="new_card">
+        <li class="card" id="card">
+            <div class="card-title">
+                <h3 class="name" id="city-name">Moscow</h3>
+                <img class="icon-weather" id="icon_weather" src="">
+                <div class="temperature" id="temp"></div>
+                <button class="delete" id="delete" onclick="deleteItem(this)"><img src="images/close.svg"></button>
+            </div>
+            <div class="loadInformCard" id="loadInformCard">
+                <div class="inform">Подождите, данные загружаются</div>
+                <img class="refresh-image" src="images/refresh.svg">
+            </div>
+            <div class="card-params" id="card-params">
+                <ul class="list-params">
+                    <li class="wind">
+                        <div class=type-param>Ветер</div>
+                        <div class=value-param id="wind"></div>
+                    </li>
+                    <li class="cloudy">
+                        <div class=type-param>Облачность</div>
+                        <div class=value-param id="clouds"></div>
+                    </li>
+                    <li class="pressure">
+                        <div class=type-param>Давление</div>
+                        <div class=value-param id="pressure">1013 hpa</div>
+                    </li>
+                    <li class="humidity">
+                        <div class=type-param>Влажность</div>
+                        <div class=value-param id="humidity">52%</div>
+                    </li>
+                    <li class="coordinates">
+                        <div class=type-param>Координаты</div>
+                        <div class=value-param id="coords">[59.88, 30.42]</div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </template>
+</body></html>
