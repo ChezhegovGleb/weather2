@@ -16,8 +16,7 @@ async function setDataHead(url) {
     big_card_params.style.display = 'none';
     loadInform.style.display = 'block';
     
-    let json = await fetch(url).then(res => res.ok ? res : Promise.reject(res))
-.then(function (resp) {
+    let json = await fetch(url).then(function (resp) {
             return resp.json()
         })
         .catch(function () {
@@ -155,8 +154,7 @@ async function setDataCard(city) {
     
     let error = false; 
     
-    let json = await fetch(url).then(res => res.ok ? res : Promise.reject(res))
-.then(function (resp) {
+    let json = await fetch(url).then(function (resp) {
             return resp.json()
         }).catch(function () {
             alert("Не удалось найти данный пункт! Удалите карточку и попробуйте снова");
