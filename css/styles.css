@@ -16,6 +16,7 @@
 }
 
 .big-icon-weather {
+    display: none;
     height: 150px;
     width: 150px;
 }
@@ -144,14 +145,14 @@
 }
 
 .big-name {
-    display: block;
+    display: none;
     color: gray;
     font-size: 60px;
     margin: 10px;
 }
 
 .big-temperature {
-    display: block;
+    display: none;
     color: gray;
     font-size: 100px;
 }
@@ -162,6 +163,7 @@
 }
 
 .card-title {
+    margin: auto;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -188,19 +190,21 @@
 }
 
 .body {
+    color: gray;
     max-width: 1080px;
     margin: auto;
+    display: grid;
 }
 
 .container {
     max-width: 1080px;
     display: grid;
-    color: gray;
     text-align: left;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
     grid-template-areas:
-        "card-city card-params"
+        "loadInform loadInform"
+        "big-card-city big-card-params"
         "favorites add-card"
         "list-cards list-cards";
 }
@@ -267,7 +271,8 @@
 }
 
 .card-city,
-.big-card-params {
+.big-card-params,
+.big-card-city {
     display: none;
 }
 

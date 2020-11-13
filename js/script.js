@@ -31,6 +31,7 @@ async function setDataHead(url) {
     let iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
     console.log(iconurl);
     document.getElementById('big-icon-weather').src = iconurl;
+    document.getElementById('big-icon-weather').style.display = "block";
 
     let coord_lat = json.coord.lat;
     let coord_lon = json.coord.lon;
@@ -52,7 +53,9 @@ async function setDataHead(url) {
     big_card_params.style.display = 'block';
 
     document.getElementById('big-name').innerHTML = city_name.toString();
+    document.getElementById('big-name').style.display = "block";
     document.getElementById('big-temp').innerHTML = city_temp.toString() + "°C";
+    document.getElementById('big-temp').style.display = "block";
     big_card_city.style.display = 'block';
 }
 
