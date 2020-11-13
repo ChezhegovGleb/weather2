@@ -28,7 +28,7 @@ async function setDataHead(url) {
     let city_temp = Math.round(json.main.temp);
 
     let iconcode = json.weather[0].icon;
-    let iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+    let iconurl = "https://openweathermap.org/img/w/" + iconcode + ".png";
     console.log(iconurl);
     document.getElementById('big-icon-weather').src = iconurl;
     document.getElementById('big-icon-weather').style.display = "block";
@@ -64,7 +64,7 @@ async function success(position) {
 
     var latitude = position.coords.latitude.toString();
     var longitude = position.coords.longitude.toString();
-    var url = "http://api.openweathermap.org/data/2.5/weather?" + lat + latitude + "&" + lon + longitude + "&appid=" + apiKey + "&units=metric";
+    var url = "https://api.openweathermap.org/data/2.5/weather?" + lat + latitude + "&" + lon + longitude + "&appid=" + apiKey + "&units=metric";
 
     setDataHead(url);
     
@@ -75,7 +75,7 @@ async function error(err) {
     if (err.PERMISSION_DENIED) {
         console.log("В доступе отказано!");
 
-        var url = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=metric";
+        var url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=metric";
         
         setDataHead(url);
         checkLocalStorage();
@@ -151,7 +151,7 @@ function deleteItem(obj) {
 }
 
 async function setDataCard(city) {
-    var url = "http://api.openweathermap.org/data/2.5/weather?q=" + city["1"] + "&appid=" + apiKey + "&units=metric";
+    var url = "https://api.openweathermap.org/data/2.5/weather?q=" + city["1"] + "&appid=" + apiKey + "&units=metric";
     
     let error = false; 
     
@@ -167,7 +167,7 @@ async function setDataCard(city) {
     let city_temp = Math.round(json.main.temp);
 
     let iconcode = json.weather[0].icon;
-    let iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+    let iconurl = "https://openweathermap.org/img/w/" + iconcode + ".png";
 
     let coord_lat = json.coord.lat;
     let coord_lon = json.coord.lon;
