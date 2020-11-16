@@ -15,14 +15,17 @@ async function setDataHead(url) {
     big_card_city.style.display = 'none';
     big_card_params.style.display = 'none';
     loadInform.style.display = 'block';
-    
+
     let json = await fetch(url).then(function (resp) {
+            if (!resp.ok) {
+                throw new Error()
+            }
             return resp.json()
         })
         .catch(function () {
             alert("Ошибка при выполнении запроса! Попробуйте обновить страницу");
         });
-    
+
     let city_name = json.name;
     let city_temp = Math.round(json.main.temp);
 
@@ -66,7 +69,7 @@ async function success(position) {
     var url = "https://api.openweathermap.org/data/2.5/weather?" + lat + latitude + "&" + lon + longitude + "&appid=" + apiKey + "&units=metric";
 
     setDataHead(url);
-    
+
     checkLocalStorage();
 };
 
@@ -75,7 +78,7 @@ async function error(err) {
         console.log("В доступе отказано!");
 
         var url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=metric";
-        
+
         setDataHead(url);
         checkLocalStorage();
     }
@@ -99,7 +102,7 @@ function checkLocalStorage() {
             }
         }
         console.log(diff);
-        diff.forEach(data => addCard(data));
+        diff.forEach(data => addCard(data, event));
         console.log(diff);
         drawedCards = drawedCards.concat(diff);
         console.log(drawedCards);
@@ -109,7 +112,7 @@ function checkLocalStorage() {
 
 navigator.geolocation.getCurrentPosition(success, error);
 
-function addCard(city) {
+async function addCard(city, event) {
     let t = document.createElement("template");
     t = new_card.content.cloneNode(true);
     var td = t.querySelector("#city-name");
@@ -122,19 +125,24 @@ function addCard(city) {
     var tb = document.getElementById("list-cards");
     var clone = document.importNode(t, true);
     tb.prepend(clone);
-    setDataCard(city);
+    return setDataCard(city, event);
 }
 
-function clickAdd() {
+async function clickAdd(event) {
     var city = [Date.now(), document.getElementById("add-city-name").value];
-    addCard(city);
-    var cards = [];
-    if (localStorage.getItem("cities") !== null) {
-        cards = JSON.parse(localStorage["cities"]);
+    let result = await addCard(city, event);
+    console.log(result);
+    if (result == 0) {
+        var cards = [];
+        if (localStorage.getItem("cities") !== null) {
+            cards = JSON.parse(localStorage["cities"]);
+        }
+        cards.push(city);
+        drawedCards.push(city);
+        localStorage.setItem("cities", JSON.stringify(drawedCards));
+    } else {
+        deleteItemByCity(city);
     }
-    cards.push(city);
-    drawedCards.push(city);
-    localStorage.setItem("cities", JSON.stringify(drawedCards));
 }
 
 function deleteItem(obj) {
@@ -149,23 +157,44 @@ function deleteItem(obj) {
     return;
 }
 
-async function setDataCard(city) {
+function deleteItemByCity(city) {
+    let idCard = city[0];
+    let obj = document.getElementById(idCard);
+    obj.remove();
+    return;
+}
+
+
+async function setDataCard(city, event) {
     var url = "https://api.openweathermap.org/data/2.5/weather?q=" + city["1"] + "&appid=" + apiKey + "&units=metric";
+
+    let error = false;
+
+    console.log(url);
     
-    let error = false; 
-    
+    var flag = 0;
+
     let json = await fetch(url).then(function (resp) {
+            console.log(resp);
+            if (!resp.ok) {
+                throw new Error()
+            }
             return resp.json()
-        }).catch(function () {
-            alert("Не удалось найти данный пункт! Удалите карточку и попробуйте снова");
-            deleteItemByCity(city);
+        })
+        .catch(function () {
+            alert("Ошибка при выполнении запроса! Попробуйте ввести название города снова");
+            flag = 1;
         });
-    
-    console.log(json);
+
+    if (flag == 1) {
+        return 1;
+    }
     let city_temp = Math.round(json.main.temp);
+
 
     let iconcode = json.weather[0].icon;
     let iconurl = "https://openweathermap.org/img/w/" + iconcode + ".png";
+
 
     let coord_lat = json.coord.lat;
     let coord_lon = json.coord.lon;
@@ -175,11 +204,9 @@ async function setDataCard(city) {
     let clouds = json.clouds.all;
     let pressure = json.main.pressure;
     let humidity = json.main.humidity;
-    
+
     let cityCard = document.getElementById(city["0"]);
-    
-    console.log(cityCard.firstChild);
-    
+
     var cityTemp = cityCard.querySelector("#temp");
     cityTemp.textContent = city_temp.toString() + "°C";
     var cityIcon = cityCard.querySelector("#icon_weather");
@@ -194,9 +221,30 @@ async function setDataCard(city) {
     cityHumidity.textContent = humidity.toString() + "%";
     var cityCoords = cityCard.querySelector("#coords");
     cityCoords.textContent = coords;
-    
+
     cityCard.querySelector("#loadInformCard").style.display = "none";
     cityCard.querySelector("#card-params").style.display = "block";
     cityCard.querySelector("#icon_weather").style.display = "block";
     cityCard.querySelector("#temp").style.display = "block";
+    return 0;
+}
+
+
+window.onload = function () {
+    var node = document.getElementById("add-city-name");
+    console.log(node);
+    node.addEventListener("keyword", function (event) {
+        event.preventDefault();
+        if (event.key === "Enter") {
+            clickAdd(event);
+        }
+        node.value = "";
+    }, false);
+    var addButton = document.getElementById("add_button");
+    console.log(addButton);
+    addButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        clickAdd(event);
+        node.value = "";
+    }, false);
 }
