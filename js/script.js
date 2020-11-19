@@ -129,7 +129,8 @@ async function addCard(city, event) {
 }
 
 async function clickAdd(event) {
-    var city = [Date.now(), document.getElementById("add-city-name").value];
+//    var city = [Date.now(), document.getElementById("add-city-name").value];
+    var city = [Date.now(), event.target.querySelector("#add-city-name").value];
     let result = await addCard(city, event);
     console.log(result);
     if (result == 0) {
@@ -231,20 +232,11 @@ async function setDataCard(city, event) {
 
 
 window.onload = function () {
-    var node = document.getElementById("add-city-name");
-    console.log(node);
-    node.addEventListener("keyword", function (event) {
-        event.preventDefault();
-        if (event.key === "Enter") {
-            clickAdd(event);
-        }
-        node.value = "";
-    }, false);
-    var addButton = document.getElementById("add_button");
-    console.log(addButton);
-    addButton.addEventListener("click", function (event) {
+    var add_card = document.getElementById("add_card");
+    console.log(add_card);
+    add_card.addEventListener("submit", function (event) {
         event.preventDefault();
         clickAdd(event);
-        node.value = "";
+        event.target.querySelector("#add-city-name").value = "";
     }, false);
 }
